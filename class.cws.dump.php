@@ -3,7 +3,7 @@
 /**
  * CwsDump
  * 
- * CwsDump is a PHP class to replace var_dump(), print_r() based on the Xdebug style.
+ * CwsDump is a PHP class to replace var_dump(), print_r() based on the XDebug style.
  *
  * CwsDump is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License as published by
@@ -18,30 +18,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
  * 
- * Related post : http://goo.gl/pRwJti
- * 
  * @package CwsDump
  * @author Cr@zy
  * @copyright 2013, Cr@zy
  * @license GNU LESSER GENERAL PUBLIC LICENSE
- * @version 1.0
+ * @version 1.1
  *
  */
 
 define('CWSDUMP_INI_FILE',          'cws.dump.ini');
-
-define('CWSDUMP_VAR_NULL',          'null');
-define('CWSDUMP_VAR_BOOL',          'boolean');
-define('CWSDUMP_VAR_STRING',        'string');
-define('CWSDUMP_VAR_INT',           'int');
-define('CWSDUMP_VAR_FLOAT',         'float');
-define('CWSDUMP_VAR_ARRAY',         'array');
-define('CWSDUMP_VAR_OBJECT',        'object');
+define('CWSDUMP_SEP_OBJECT',        '___');
 
 define('CWSDUMP_INICAT_1',          'cwsdump_general');
 define('CWSDUMP_INI1_MAXDEPTH',     'cwsdump_max_depth');
 define('CWSDUMP_INI1_MAXDATA',      'cwsdump_max_data');
-define('CWSDUMP_INI1_SEPOBJECT',    'cwsdump_sep_object');
+define('CWSDUMP_INI1_MAXCHILDREN',  'cwsdump_max_children');
 define('CWSDUMP_INI1_FONTFAMILY',   'cwsdump_font_family');
 
 define('CWSDUMP_INICAT_2',          'cwsdump_colors');
@@ -52,11 +43,23 @@ define('CWSDUMP_INI2_INT',          'cwsdump_int');
 define('CWSDUMP_INI2_FLOAT',        'cwsdump_float');
 define('CWSDUMP_INI2_AREMPTY',      'cwsdump_array_empty');
 
-define('CWSDUMP_INICAT_3',          'cwsdump_display_values');
+define('CWSDUMP_INICAT_3',          'cwsdump_names');
 define('CWSDUMP_INI3_NULL',         'cwsdump_null');
-define('CWSDUMP_INI3_TRUE',         'cwsdump_true');
-define('CWSDUMP_INI3_FALSE',        'cwsdump_false');
-define('CWSDUMP_INI3_AREMPTY',      'cwsdump_array_empty');
+define('CWSDUMP_INI3_BOOL',         'cwsdump_bool');
+define('CWSDUMP_INI3_STRING',       'cwsdump_string');
+define('CWSDUMP_INI3_INT',          'cwsdump_int');
+define('CWSDUMP_INI3_FLOAT',        'cwsdump_float');
+define('CWSDUMP_INI3_ARRAY',        'cwsdump_array');
+define('CWSDUMP_INI3_OBJECT',       'cwsdump_object');
+define('CWSDUMP_INI3_RESOURCE',     'cwsdump_resource');
+
+define('CWSDUMP_INICAT_4',          'cwsdump_display_values');
+define('CWSDUMP_INI4_NULL',         'cwsdump_null');
+define('CWSDUMP_INI4_TRUE',         'cwsdump_true');
+define('CWSDUMP_INI4_FALSE',        'cwsdump_false');
+define('CWSDUMP_INI4_AREMPTY',      'cwsdump_array_empty');
+define('CWSDUMP_INI4_MAXDEPTH',     'cwsdump_max_depth');
+define('CWSDUMP_INI4_MAXCHILDREN',  'cwsdump_max_children');
 
 class CwsDump
 {
@@ -96,10 +99,10 @@ class CwsDump
             if ($this->iniProps !== false) {
                 $this->checkIniProps();
             } else {
-                die('CwsDump: An error occurred while parsing ' . CWSDUMP_INI_FILE . ' file...');
+                die(get_class($this) . ': An error occurred while parsing ' . CWSDUMP_INI_FILE . ' file...');
             }
         } else {
-            die('CwsDump: Ini file ' . CWSDUMP_INI_FILE . ' not found...');
+            die(get_class($this) . ': Ini file ' . CWSDUMP_INI_FILE . ' not found...');
         }
     }
     
@@ -110,9 +113,9 @@ class CwsDump
     {
         // Cat GENERAL
         $cat = $this->checkIniCat(CWSDUMP_INICAT_1);
-        $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_MAXDEPTH, '8');
-        $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_MAXDATA, '1024');
-        $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_SEPOBJECT, '___');
+        $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_MAXDEPTH, '3');
+        $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_MAXDATA, '512');
+        $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_MAXCHILDREN, '128');
         $this->checkIniKey(CWSDUMP_INICAT_1, CWSDUMP_INI1_FONTFAMILY, 'Monospace');
         
         // Cat COLORS
@@ -124,16 +127,30 @@ class CwsDump
         $this->checkIniKey(CWSDUMP_INICAT_2, CWSDUMP_INI2_FLOAT, '#F57900');
         $this->checkIniKey(CWSDUMP_INICAT_2, CWSDUMP_INI2_AREMPTY, '#888A85');
         
-        // Cat DISPLAY_VALUES
+        // Cat COLORS
         $cat = $this->checkIniCat(CWSDUMP_INICAT_3);
         $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_NULL, 'null');
-        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_TRUE, 'true');
-        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_FALSE, 'false');
-        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_AREMPTY, 'empty');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_BOOL, 'boolean');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_STRING, 'string');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_INT, 'int');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_FLOAT, 'float');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_ARRAY, 'array');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_OBJECT, 'object');
+        $this->checkIniKey(CWSDUMP_INICAT_3, CWSDUMP_INI3_RESOURCE, 'resource');
+        
+        // Cat DISPLAY_VALUES
+        $cat = $this->checkIniCat(CWSDUMP_INICAT_4);
+        $this->checkIniKey(CWSDUMP_INICAT_4, CWSDUMP_INI4_NULL, 'null');
+        $this->checkIniKey(CWSDUMP_INICAT_4, CWSDUMP_INI4_TRUE, 'true');
+        $this->checkIniKey(CWSDUMP_INICAT_4, CWSDUMP_INI4_FALSE, 'false');
+        $this->checkIniKey(CWSDUMP_INICAT_4, CWSDUMP_INI4_AREMPTY, 'empty');
+        $this->checkIniKey(CWSDUMP_INICAT_4, CWSDUMP_INI4_MAXDEPTH, '...');
+        $this->checkIniKey(CWSDUMP_INICAT_4, CWSDUMP_INI4_MAXCHILDREN, 'more elements...');
         
         // Change some types
         $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDEPTH] = intval($this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDEPTH]);
         $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDATA] = intval($this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDATA]);
+        $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXCHILDREN] = intval($this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXCHILDREN]);
     }
     
     /**
@@ -182,7 +199,14 @@ class CwsDump
             $result .= $this->dumpFloat($var, $or);
         } elseif (is_array($var) || is_object($var)) {
             if ($this->recurseDepth >= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDEPTH]) {
-                return 'Recursion depth limit reached';
+                $type = is_object($var) ? $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_OBJECT]
+                    : $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_ARRAY];
+                $maxDepthReached = $this->writeStart(false);
+                $maxDepthReached .= $this->writeRow('<strong>' . $type . '</strong>');
+                $maxDepthReached .= $this->writeRow('<span style="padding-left:10pt;font-style:italic;"><i>'
+                    . $this->iniProps[CWSDUMP_INICAT_4][CWSDUMP_INI4_MAXDEPTH] . '</span>');
+                $maxDepthReached .= $this->writeEnd();
+                return $maxDepthReached;
             }
             $this->recurseDepth++;
             if (is_array($var)) {
@@ -192,7 +216,7 @@ class CwsDump
             }
             $this->recurseDepth--;
         } elseif(is_resource($var)) {
-            $result .= 'resource';
+            $result .= $this->dumpRes($var, $or);
         } else {
             $result .= '???';
         }
@@ -203,8 +227,8 @@ class CwsDump
     private function dumpNull($or)
     {
         return $this->processVar(
+            $this->iniProps[CWSDUMP_INICAT_4][CWSDUMP_INI4_NULL],
             $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_NULL],
-            CWSDUMP_VAR_NULL,
             $this->iniProps[CWSDUMP_INICAT_2][CWSDUMP_INI2_NULL],
             $or
         );
@@ -213,8 +237,8 @@ class CwsDump
     private function dumpBool($var, $or)
     {
         return $this->processVar(
-            $var ? $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_TRUE] : $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_FALSE],
-            CWSDUMP_VAR_BOOL,
+            $var ? $this->iniProps[CWSDUMP_INICAT_4][CWSDUMP_INI4_TRUE] : $this->iniProps[CWSDUMP_INICAT_4][CWSDUMP_INI4_FALSE],
+            $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_BOOL],
             $this->iniProps[CWSDUMP_INICAT_2][CWSDUMP_INI2_BOOL],
             $or
         );
@@ -224,7 +248,7 @@ class CwsDump
     {
         return $this->processVar(
             var_export($var, true),
-            CWSDUMP_VAR_STRING,
+            $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_STRING],
             $this->iniProps[CWSDUMP_INICAT_2][CWSDUMP_INI2_STRING],
             $or
         );
@@ -234,7 +258,7 @@ class CwsDump
     {
         return $this->processVar(
             var_export($var, true),
-            CWSDUMP_VAR_INT,
+            $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_INT],
             $this->iniProps[CWSDUMP_INICAT_2][CWSDUMP_INI2_INT],
             $or
         );
@@ -244,7 +268,7 @@ class CwsDump
     {
         return $this->processVar(
             var_export($var, true),
-            CWSDUMP_VAR_FLOAT,
+            $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_FLOAT],
             $this->iniProps[CWSDUMP_INICAT_2][CWSDUMP_INI2_FLOAT],
             $or
         );
@@ -253,14 +277,15 @@ class CwsDump
     private function dumpArray(&$var, $or)
     {
         $len = count($var);
-    
+        
         $result = $this->writeStart($or);
+        $type = $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_ARRAY];
         
         if ($len === 0 && $var === array()) {
-            $result .= $this->writeRow('<strong>' . CWSDUMP_VAR_ARRAY . '</strong>');
+            $result .= $this->writeRow('<strong>' . $type . '</strong>');
             $result .= $this->writeRow($this->dumpArrayEmpty());
         } else {
-            $result .= $this->writeRow('<strong>' . CWSDUMP_VAR_ARRAY . '</strong> <i>(length=' . $len . ')</i>');
+            $result .= $this->writeRow('<strong>' . $type . '</strong> <i>(length=' . $len . ')</i>');
             $result .= $this->writeRow($this->processArray($var, false));
         }
         
@@ -271,10 +296,11 @@ class CwsDump
     
     private function dumpArrayEmpty()
     {
-        $result = '<span style="font-style:italic;font-family:' . $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';';
+        $result = '<span style="font-style:italic;font-family:'
+            . $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';';
         $result .= 'color:' . $this->iniProps[CWSDUMP_INICAT_2][CWSDUMP_INI2_AREMPTY] . ';">';
-        $result .= $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_AREMPTY] . '</span>';
-        return $this->writeFull($result, false);
+        $result .= $this->iniProps[CWSDUMP_INICAT_4][CWSDUMP_INI4_AREMPTY] . '</span>';
+        return '<span style="padding-left:10pt">' . $result . '</span>';
     }
     
     private function dumpObject(&$var, $or)
@@ -286,24 +312,20 @@ class CwsDump
         foreach ($array as $key => $value) {
             $explKey = explode("\0", $key);
             if (count($explKey) == 1) {
-                $propkey = $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT] . 'public';
-                $propkey .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT] . $key;
-                $props[$propkey] = $value;
+                $props[CWSDUMP_SEP_OBJECT . 'public' . CWSDUMP_SEP_OBJECT . $key] = $value;
             } elseif ($explKey[1] == '*') {
-                $propkey = $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT] . 'protected';
-                $propkey .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT] . $explKey[2];
-                $props[$propkey] = $value;
+                $props[CWSDUMP_SEP_OBJECT . 'protected' . CWSDUMP_SEP_OBJECT . $explKey[2]] = $value;
             } else {
-                $propkey = $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT] . 'protected';
-                $propkey .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT] . $explKey[2];
-                $props[$propkey] = $value;
+                $props[CWSDUMP_SEP_OBJECT . 'protected' . CWSDUMP_SEP_OBJECT . $explKey[2]] = $value;
             }
         }
         
-        $row = '<span style="font-weight:bold;font-family:' . $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';">';
-        $row .= CWSDUMP_VAR_OBJECT . '</span> ';
-        $row .= '<span style="font-style:italic;font-family:' . $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';">';
-        $row .= $object . '</i>';
+        $row = '<span style="font-weight:bold;font-family:';
+        $row .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';">';
+        $row .= $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_OBJECT] . '</span> ';
+        $row .= '<span style="font-style:italic;font-family:';
+        $row .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';">';
+        $row .= '(' . $object . ')</i>';
         
         $result = $this->writeStart($or);
         $result .= $this->writeRow($row);
@@ -313,18 +335,31 @@ class CwsDump
         return $this->writePre($result, $or);
     }
     
+    private function dumpRes(&$var, $or)
+    {
+        $result = '<span style="font-weight:bold;font-family:';
+        $result .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';">';
+        $result .= $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_RESOURCE] . '</span> ';
+        $result .= '<span style="font-style:italic;font-family:';
+        $result .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';">';
+        $result .= '(' . intval($var) . ', ' . get_resource_type($var) . ')</i>';
+        return $this->writePre($result, $or);
+    }
+    
     private function processVar($content, $type, $color, $or)
     {
         $len = strlen($content);
-        if ($len > $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDATA] && $type == CWSDUMP_VAR_STRING) {
+        if ($len > $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDATA]
+                && $type == $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_STRING]) {
             $content = substr($content, 0, $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXDATA] - 3) . '...';
         }
         
-        $result = $type != CWSDUMP_VAR_NULL ? '<small>' . $type . '</small> ' : '';
-        $result .= '<span style="font-family:' . $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';color:' . $color . ';">';
+        $result = $type != $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_NULL] ? '<small>' . $type . '</small> ' : '';
+        $result .= '<span style="font-family:';
+        $result .= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_FONTFAMILY] . ';color:' . $color . ';">';
         $result .= str_replace(array("\n", ' '), array('<br/>', '&#160;'), htmlspecialchars($content));
         $result .= '</span>';
-        $result .= $type == CWSDUMP_VAR_STRING ? ' <i>(length=' . $len . ')</i>' : '';
+        $result .= $type == $this->iniProps[CWSDUMP_INICAT_3][CWSDUMP_INI3_STRING] ? ' <i>(length=' . $len . ')</i>' : '';
         
         return $this->writePre($result, $or);
     }
@@ -339,13 +374,19 @@ class CwsDump
     
         $result = $this->writeStart($or);
     
+        $children = 0;
         foreach($var as $key => $value) {
-            if (substr($key, 0, 3) === $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT]) {
-                $expKey = explode($this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_SEPOBJECT], $key);
+            if ($children >= $this->iniProps[CWSDUMP_INICAT_1][CWSDUMP_INI1_MAXCHILDREN]) {
+                $result .= $this->writeRow('<i>' . $this->iniProps[CWSDUMP_INICAT_4][CWSDUMP_INI4_MAXCHILDREN] . '</i>');
+                break;
+            }
+            if (substr($key, 0, 3) === CWSDUMP_SEP_OBJECT) {
+                $expKey = explode(CWSDUMP_SEP_OBJECT, $key);
                 $result .= $this->writeRow('<i>' . $expKey[1] . '</i> \'' . $expKey[2] . '\' => ' . $this->dump($value, false));
             } else {
                 $result .= $this->writeRow((is_numeric($key) ? $key : '\'' . $key . '\'') . ' => ' . $this->dump($value, false));
             }
+            $children++;
         }
     
         if ($var !== array_pop($this->recurseDetection)) {
@@ -389,11 +430,6 @@ class CwsDump
     private function writeEnd()
     {
         return "</table>\r\n";
-    }
-    
-    private function writeFull($elt, $or)
-    {
-        return $this->writeStart($or) . $this->writeRow($elt) . $this->writeEnd();
     }
 }
 
