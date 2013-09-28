@@ -103,7 +103,7 @@ An example is available in ``index.php`` file :
 
 ## Method
 
-Just call **cwsDump($var);** !
+Just call **cwsDump()** !
 
 ## License
 
