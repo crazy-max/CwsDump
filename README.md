@@ -75,11 +75,13 @@ class DebugTestClass
     public $pubArrayEmpty = array();
     public $pubObject;
     public $pubObject2;
+    public $pubRes;
     
     public function __construct()
     {
         $this->pubObject = new DateTime();
         $this->pubObject2 = new Exception();
+        $this->pubRes = mysql_connect();
     }
 }
 
@@ -94,6 +96,7 @@ $array_keys = array("key1" => "aString", "key2" => $longstr, "key3" => 10, "key4
 $array_empty = array();
 $class = new DebugTestClass();
 $obj = new DateTime();
+$res = mysql_connect();
 
 cwsDump($null);
 cwsDump($str);
@@ -106,6 +109,7 @@ cwsDump($array_keys);
 cwsDump($array_empty);
 cwsDump($class);
 cwsDump($obj);
+cwsDump($res);
 
 ?>
 ```
