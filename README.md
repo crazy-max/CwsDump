@@ -99,7 +99,7 @@ cwsDump($obj);
 
 An example is available in ``index.php`` file :
 
-![](http://static.crazyws.fr/resources/blog/2013/09/cwsdump-var-dump-xdebug-full.png)
+
 
 ## Method
 
