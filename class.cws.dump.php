@@ -22,7 +22,7 @@
  * @author Cr@zy
  * @copyright 2013, Cr@zy
  * @license GNU LESSER GENERAL PUBLIC LICENSE
- * @version 1.1
+ * @version 1.2
  *
  */
 
@@ -85,7 +85,7 @@ class CwsDump
     
     public function __construct()
     {
-        $this->retrieveIniProps(CWSDUMP_INI_FILE);
+        $this->retrieveIniProps(realpath(dirname(__FILE__)) . '/' . CWSDUMP_INI_FILE);
     }
     
     /**
@@ -433,6 +433,11 @@ class CwsDump
     }
 }
 
-function cwsDump($var) {
-    echo call_user_func(array(new CwsDump(), 'dump'), $var);
+function cwsDump($var, $echo=true) {
+    $result = call_user_func(array(new CwsDump(), 'dump'), $var);
+    if ($echo) {
+        echo $result;
+    } else {
+        return $result;
+    }
 }
