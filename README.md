@@ -8,7 +8,7 @@ Copy the ``class.cws.dump.php`` and ``cws.dump.ini`` files in a same folder on y
 
 ## Getting started
 
-Just call **cwsDump()** !
+Just call **cwsDump()** !<br />
 See ``example.php`` file sample to help you.
 
 ### Configuration
