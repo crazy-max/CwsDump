@@ -17,7 +17,7 @@ You can change the configuration of CwsDump in the ``cws.dump.ini`` file.
 
 ## Example
 
-![](http://static.crazyws.fr/resources/blog/2013/09/cwsdump-var-dump-xdebug-full3.png)
+![](https://raw.github.com/crazy-max/CwsDump/master/example.png)
 
 ## License
 
