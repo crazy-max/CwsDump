@@ -8,6 +8,7 @@ Copy the ``class.cws.dump.php`` and ``cws.dump.ini`` files in a same folder on y
 
 ## Getting started
 
+Just call **cwsDump()** !
 See ``example.php`` file sample to help you.
 
 ### Configuration
@@ -17,10 +18,6 @@ You can change the configuration of CwsDump in the ``cws.dump.ini`` file.
 ## Example
 
 ![](http://static.crazyws.fr/resources/blog/2013/09/cwsdump-var-dump-xdebug-full3.png)
-
-## Function
-
-Just call **cwsDump()** !
 
 ## License
 
