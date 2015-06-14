@@ -4,15 +4,15 @@ CwsDump is a PHP class to replace var_dump(), print_r() based on the Xdebug styl
 
 ### Installation
 
-* Copy the ``class.cws.dump.php`` and ``cws.dump.ini`` files in a same folder on your server.
+Copy the ``class.cws.dump.php`` and ``cws.dump.ini`` files in a same folder on your server.
+
+## Getting started
+
+See ``example.php`` file sample to help you.
 
 ### Configuration
 
 You can change the configuration of CwsDump in the ``cws.dump.ini`` file.
-
-## Getting started
-
-See ``index.php`` file sample to help you.
 
 ## Example
 

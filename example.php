@@ -51,5 +51,3 @@ cwsDump($array_empty);
 cwsDump($class);
 cwsDump($obj);
 cwsDump($res);
-
-?>
