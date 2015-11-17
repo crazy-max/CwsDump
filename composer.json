@@ -1,0 +1,26 @@
+{
+    "name":         "crazy-max/cws-dump",
+    "type":         "library",
+    "description":  "CwsDump is a PHP class to replace var_dump(), print_r() based on the Xdebug style.",
+    "keywords":     [],
+    "homepage":     "https://github.com/crazy-max/CwsDump",
+    "license":      "LGPL",
+    "authors":      [
+        {
+            "name":     "crazy-max",
+            "homepage": "http://www.crazyws.fr/"
+        }
+    ],
+    "require":      {
+    },
+    "require-dev":  {
+    },
+    "suggest":      {
+    },
+    "autoload":     {
+      "classmap": [ "class.cws.dump.php"]
+    },
+    "extra": {
+    },
+    "minimum-stability": "dev"
+}
