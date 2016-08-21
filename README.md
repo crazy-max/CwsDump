@@ -1,19 +1,29 @@
 # CwsDump
 
-CwsDump is a PHP class to replace var_dump(), print_r() based on the Xdebug style.
+PHP class to replace var_dump(), print_r() based on the Xdebug style.
 
-### Installation
+### Requirements
+
+* PHP >= 5.3
+
+### Installation with Composer
+
+```bash
+composer require crazy-max/CwsDump
+```
+
+And download the code:
+
+```bash
+composer install # or update
+```
 
 Copy the ``class.cws.dump.php`` and ``cws.dump.ini`` files in a same folder on your server.
 
 ## Getting started
 
-Just call **cwsDump()** !<br />
-See ``example.php`` file sample to help you.
-
-### Configuration
-
-You can change the configuration of CwsDump in the ``cws.dump.ini`` file.
+Just call `cwsDump()`.<br />
+See `tests/test.php` file sample to help you.
 
 ## Example
 
