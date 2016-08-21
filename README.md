@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/crazy-max/CwsDump/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/crazy-max/CwsDump/?branch=master)
+[![Build Status](https://travis-ci.org/crazy-max/CwsDump.svg?branch=master)](https://travis-ci.org/crazy-max/CwsDump) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/crazy-max/CwsDump/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/crazy-max/CwsDump/?branch=master)
 
 # CwsDump
 
