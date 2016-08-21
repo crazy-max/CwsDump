@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Cws\CwsDump as cwsDump;
-
 class DebugTestClass
 {
     public $pubNull = null;
