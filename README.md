@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/crazy-max/CwsDump/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/crazy-max/CwsDump/?branch=master)
+
 # CwsDump
 
 PHP class to replace var_dump(), print_r() based on the Xdebug style.
