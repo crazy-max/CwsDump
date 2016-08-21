@@ -18,8 +18,6 @@ And download the code:
 composer install # or update
 ```
 
-Copy the ``class.cws.dump.php`` and ``cws.dump.ini`` files in a same folder on your server.
-
 ## Getting started
 
 Just call `cwsDump()`.<br />
