@@ -11,7 +11,7 @@ PHP class to replace var_dump(), print_r() based on the Xdebug style.
 ## Installation with Composer
 
 ```bash
-composer require crazy-max/CwsDump
+composer require crazy-max/cws-dump
 ```
 
 And download the code:
