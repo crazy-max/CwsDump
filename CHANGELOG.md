@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6 (2016/08/22)
+
+* Duplicate cwsDump function
+
 ## 1.5 (2016/08/21)
 
 * Remove ini file

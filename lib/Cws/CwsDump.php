@@ -339,12 +339,3 @@ class CwsDump
         return "</table>\r\n";
     }
 }
-
-function cwsDump($var, $echo = true) {
-    $result = call_user_func(array(new CwsDump(), 'dump'), $var);
-    if ($echo) {
-        echo $result;
-        return null;
-    }
-    return $result;
-}
