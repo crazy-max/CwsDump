@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/crazy-max/CwsDump.svg?branch=master)](https://travis-ci.org/crazy-max/CwsDump) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/crazy-max/CwsDump/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/crazy-max/CwsDump/?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/crazy-max/cws-dump.svg?style=flat-square)](https://packagist.org/packages/crazy-max/cws-dump)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.3.0-8892BF.svg?style=flat-square)](https://php.net/)
+[![Build Status](https://img.shields.io/travis/crazy-max/CwsDump/master.svg?style=flat-square)](https://travis-ci.org/crazy-max/CwsDump)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/crazy-max/CwsDump.svg?style=flat-square)](https://scrutinizer-ci.com/g/crazy-max/CwsDump)
 
 # CwsDump
 
@@ -6,7 +9,7 @@ PHP class to replace var_dump(), print_r() based on the Xdebug style.
 
 ## Requirements
 
-* PHP >= 5.3
+* PHP >= 5.3.0
 
 ## Installation with Composer
 
