@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7 (2016/08/22)
+
+* Bug with special chars
+
 ## 1.6 (2016/08/22)
 
 * Duplicate cwsDump function
