@@ -93,7 +93,7 @@ class CwsDump
      *
      * @var array
      */
-    private $recurseDetection = [];
+    private $recurseDetection = array();
 
     public function __construct()
     {
@@ -205,7 +205,7 @@ class CwsDump
         $result = $this->writeStart($or);
         $type = self::NAME_ARRAY;
 
-        if ($len === 0 && $var === []) {
+        if ($len === 0 && $var === array()) {
             $result .= $this->writeRow('<strong>'.$type.'</strong>');
             $result .= $this->writeRow($this->dumpArrayEmpty());
         } else {
@@ -230,7 +230,7 @@ class CwsDump
 
     private function dumpObject(&$var, $or)
     {
-        $props = [];
+        $props = array();
         $object = get_class($var);
         $array = (array) $var;
 
@@ -276,7 +276,7 @@ class CwsDump
 
         $result = $type != self::NAME_NULL ? '<small>'.$type.'</small> ' : '';
         $result .= '<span style="font-family:'.$this->fontFamily.';color:'.$color.';">';
-        $result .= str_replace(["\n", ' '], ['<br/>', '&#160;'], htmlspecialchars($content, ENT_IGNORE));
+        $result .= str_replace(array("\n", ' '), array('<br/>', '&#160;'), htmlspecialchars($content, ENT_IGNORE));
         $result .= '</span>';
         $result .= $type == self::NAME_STRING ? ' <i>(length='.$len.')</i>' : '';
 

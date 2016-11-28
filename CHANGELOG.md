@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8 (2016/11/28)
+
+* Add StyleCI config
+* Fix short syntax for arrays
+
 ## 1.7 (2016/08/22)
 
 * Bug with special chars
