@@ -15,7 +15,7 @@ use Cws\CwsDump;
 
 function cwsDump($var, $echo = true)
 {
-    $result = call_user_func([new CwsDump(), 'dump'], $var);
+    $result = call_user_func(array(new CwsDump(), 'dump'), $var);
     if ($echo) {
         echo $result;
 
