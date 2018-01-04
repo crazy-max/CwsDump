@@ -4,11 +4,11 @@
   "description": "PHP class to replace var_dump(), print_r() based on the Xdebug style.",
   "keywords": ["dump", "var_dump", "print_r", "xdebug"],
   "homepage": "https://github.com/crazy-max/CwsDump",
-  "license": "LGPL",
+  "license": "MIT",
   "authors": [
     {
-      "name": "crazy-max",
-      "homepage": "http://www.crazyws.fr/"
+      "name": "CrazyMax",
+      "homepage": "https://github.com/crazy-max"
     }
   ],
   "minimum-stability": "dev",
