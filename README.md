@@ -4,6 +4,7 @@
 [![Code Quality](https://img.shields.io/codacy/grade/0ea42a57c14d47b7a26e1991fc41ef36.svg?style=flat-square)](https://www.codacy.com/app/crazy-max/CwsDump)
 [![StyleCI](https://styleci.io/repos/13171241/shield?style=flat-square)](https://styleci.io/repos/13171241)
 [![Gemnasium](https://img.shields.io/gemnasium/crazy-max/CwsDump.svg?style=flat-square)](https://gemnasium.com/github.com/crazy-max/CwsDump)
+[![Beerpay](https://img.shields.io/beerpay/crazy-max/CwsDump.svg?style=flat-square)](https://beerpay.io/crazy-max/CwsDump)
 [![Donate Paypal](https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GCKCDZFTKMPKW)
 
 ## About
@@ -33,11 +34,12 @@ See `tests/test.php` file sample to help you.
 
 ## How can i help ?
 
-We welcome all kinds of contributions :raised_hands:!<br />
+All kinds of contributions are welcomed :raised_hands:!<br />
 The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon:<br />
-Any funds donated will be used to help further development on this project! :gift_heart:
+But we're not gonna lie to each other, I'd rather you buy me a beer or two :beers:!
 
-[![Donate Paypal](.res/paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GCKCDZFTKMPKW)
+[![Beerpay](https://beerpay.io/crazy-max/CwsDump/badge.svg?style=beer-square)](https://beerpay.io/crazy-max/CwsDump)
+or [![Paypal](.res/paypal.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GCKCDZFTKMPKW)
 
 ## License
 
