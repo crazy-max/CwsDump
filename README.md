@@ -2,8 +2,6 @@
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.3.0-8892BF.svg?style=flat-square)](https://php.net/)
 [![Build Status](https://img.shields.io/travis/crazy-max/CwsDump/master.svg?style=flat-square)](https://travis-ci.org/crazy-max/CwsDump)
 [![Code Quality](https://img.shields.io/codacy/grade/0ea42a57c14d47b7a26e1991fc41ef36.svg?style=flat-square)](https://www.codacy.com/app/crazy-max/CwsDump)
-[![StyleCI](https://styleci.io/repos/13171241/shield?style=flat-square)](https://styleci.io/repos/13171241)
-[![Libraries.io](https://img.shields.io/librariesio/github/crazy-max/CwsDump.svg?style=flat-square)](https://libraries.io/github/crazy-max/CwsDump)
 [![Donate Paypal](https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GCKCDZFTKMPKW)
 
 ## About
