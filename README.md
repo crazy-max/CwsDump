@@ -1,6 +1,6 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/crazy-max/cws-dump.svg?style=flat-square)](https://packagist.org/packages/crazy-max/cws-dump)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.3.0-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://img.shields.io/travis/crazy-max/CwsDump/master.svg?style=flat-square)](https://travis-ci.org/crazy-max/CwsDump)
+[![Build Status](https://img.shields.io/travis/com/crazy-max/CwsDump/master.svg?style=flat-square)](https://travis-ci.com/crazy-max/CwsDump)
 [![Code Quality](https://img.shields.io/codacy/grade/0ea42a57c14d47b7a26e1991fc41ef36.svg?style=flat-square)](https://www.codacy.com/app/crazy-max/CwsDump)
 [![Donate Paypal](https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GCKCDZFTKMPKW)
 
@@ -29,9 +29,9 @@ See `tests/test.php` file sample to help you.
 
 ![](.res/example.png)
 
-## How can i help ?
+## How can I help ?
 
-All kinds of contributions are welcomed :raised_hands:!<br />
+All kinds of contributions are welcome :raised_hands:!<br />
 The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon:<br />
 But we're not gonna lie to each other, I'd rather you buy me a beer or two :beers:!
 
