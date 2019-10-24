@@ -1,4 +1,5 @@
 {
+  "abandoned": true,
   "name": "crazy-max/cws-dump",
   "type":  "library",
   "description": "PHP class to replace var_dump(), print_r() based on the Xdebug style.",
